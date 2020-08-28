@@ -11,17 +11,18 @@ var answer3 = document.querySelector('#ans3');
 var answer4 = document.querySelector('#ans4');
 var result = document.querySelector('#result');
 var highscoreBtn = document.querySelector('#highscoreLink');
+var form = document.querySelector('#form');
 var initials = document.querySelector('#initials');
-
+var finalScore = document.querySelector('#score')
 
 
 
 var totalSeconds = 60;
-var secondsElapsed = 0;
+var secondsElapsed = 1;
 var currentQ = 0;
 var correctAnswer;
 var interval;
-var score;
+var score = 0;
 var question1 = {"Question":"Question Text1","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
 var question2 = {"Question":"Question Text2","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
 var question3 = {"Question":"Question Text3","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
@@ -33,13 +34,14 @@ var question8 = {"Question":"Question Text8","Answers": ["Answer1","Answer2","An
 var question9 = {"Question":"Question Text9","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
 var question10 = {"Question":"Question Text10","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
 var questions = [question1,question2,question3,question4,question5,question6,question7,question8,question9,question10]
+var highScores =[];
 
 
 function startTimer() {
   interval = setInterval(function(){
     var secondsRemaining = totalSeconds - secondsElapsed; 
-    timer.textContent = secondsRemaining;
     secondsElapsed++;
+    timer.textContent = secondsRemaining;
     if (secondsRemaining == 0) {
         quizEnd();
     }
@@ -52,12 +54,13 @@ function quizSet(currentQ){
     answer3.textContent = "3: " + questions[currentQ].Answers[2];
     answer4.textContent = "4: " + questions[currentQ].Answers[3];
     return questions[currentQ].Correct
-
-
 }
 
 function quizStart(){
     startTimer();
+    score = 0;
+    currentQ = 0;
+    secondsElapsed = 1;
     correctAnswer = quizSet(currentQ);
 }
 
@@ -66,14 +69,14 @@ function answerQuestion(){
         currentAns = parseInt(event.target.id[3]);
         if (currentAns == correctAnswer){
             result.textContent = "Correct!"
-            score = score + 10;
+            score += 10;
         }
         else {
             result.textContent = "Incorrect!";
-            secondsElapsed = secondsElapsed + 5;
+            secondsElapsed += 5;
         }
         currentQ++;
-        if (currentQ<questions.length) {
+        if (currentQ < questions.length) {
         quizSet(currentQ);}
         else {
             quizEnd();
@@ -82,37 +85,47 @@ function answerQuestion(){
 }
 
 function quizEnd(){
-    
+    score += (totalSeconds-secondsElapsed);
+    clearInterval(interval);
+    finalScore.textContent = score; 
 }
+
 function writeHighscores(){
-    for (var i = 0; i < obj.length; i++) {
+    
+    sortedhighScores= Object.entries(highScores).sort((a,b)=>b[1]-a[1]);
+    console.log(sortedhighScores);
+    tbody.innerHTML = null;
+    for (var i = 0; i < sortedhighScores.length; i++) {
     var tr = "<tr>";
+        var place = i+1
+    tr += "<td>"+ place.toString() +"<td>" + sortedhighScores[i][0] + "</td>" + "<td>" + sortedhighScores[i][1].toString() + "</td></tr>";
 
-    /* Verification to add the last decimal 0 */
-    if (obj[i].value.toString().substring(obj[i].value.toString().indexOf('.'), obj[i].value.toString().length) < 2) 
-        obj[i].value += "0";
-
-    /* Must not forget the $ sign */
-    tr += "<td>" + obj[i].key + "</td>" + "<td>$" + obj[i].value.toString() + "</td></tr>";
-
-    /* We add the table row to the table body */
     tbody.innerHTML += tr;
 }}
 
-function resetScores(){}
+function resetScores(){
+    highScores = [];
+    writeHighscores();
+}
 
 function goHome(){}
 
-function goHighscores(){}
+function goHighscores(){
+    writeHighscores()
+}
 
-function setNewScore(){}
+function setNewScore(event){
+    event.preventDefault();
+    highScores[initials.value]= score;
+    goHighscores();
+    
+}
 
 
 
 homeBtn.addEventListener("click", goHome);
 startBtn.addEventListener("click", quizStart);
-
-initials.addEventListener("submit", setNewScore);
+form.addEventListener("submit", setNewScore);
 resetBtn.addEventListener("click", resetScores);
 answers.addEventListener("click", answerQuestion);
 highscoreBtn.addEventListener("click", goHighscores);
