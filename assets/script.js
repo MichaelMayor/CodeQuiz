@@ -33,8 +33,13 @@ var question7 = {"Question":"Question Text7","Answers": ["Answer1","Answer2","An
 var question8 = {"Question":"Question Text8","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
 var question9 = {"Question":"Question Text9","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
 var question10 = {"Question":"Question Text10","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var questions = [question1,question2,question3,question4,question5,question6,question7,question8,question9,question10]
-var highScores =[];
+var questions = [question1,question2,question3,question4,question5,question6,question7,question8,question9,question10];
+
+var highScores= JSON.parse(localStorage.getItem("highScores"));
+
+
+
+
 
 
 function startTimer() {
@@ -92,6 +97,7 @@ function quizEnd(){
 
 function writeHighscores(){
     
+    
     sortedhighScores= Object.entries(highScores).sort((a,b)=>b[1]-a[1]);
     console.log(sortedhighScores);
     tbody.innerHTML = null;
@@ -101,10 +107,12 @@ function writeHighscores(){
     tr += "<td>"+ place.toString() +"<td>" + sortedhighScores[i][0] + "</td>" + "<td>" + sortedhighScores[i][1].toString() + "</td></tr>";
 
     tbody.innerHTML += tr;
+    localStorage.setItem("highScores", JSON.stringify(highScores))
 }}
 
 function resetScores(){
-    highScores = [];
+    highScores = {};
+    localStorage.setItem("highScores", JSON.stringify(highScores))
     writeHighscores();
 }
 
@@ -116,9 +124,9 @@ function goHighscores(){
 
 function setNewScore(event){
     event.preventDefault();
+    if (highScores==null) {highScores = {};}
     highScores[initials.value]= score;
-    goHighscores();
-    
+    goHighscores();   
 }
 
 
