@@ -23,16 +23,16 @@ var currentQ = 0;
 var correctAnswer;
 var interval;
 var score = 0;
-var question1 = {"Question":"Question Text1","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question2 = {"Question":"Question Text2","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question3 = {"Question":"Question Text3","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question4 = {"Question":"Question Text4","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question5 = {"Question":"Question Text5","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question6 = {"Question":"Question Text6","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question7 = {"Question":"Question Text7","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question8 = {"Question":"Question Text8","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question9 = {"Question":"Question Text9","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
-var question10 = {"Question":"Question Text10","Answers": ["Answer1","Answer2","Answer3","Answer4"], "Correct":1};
+var question1 = {"Question":"Select the correct HTML option to create an e-mail link","Answers": ["Mail>xxx@yyy.com/mail","Mail href=\"xxx@yyy.com\"","A href=mailto:xxx@yyy.com","A href=\"xxx@yyy.com\""], "Correct":3};
+var question2 = {"Question":"Select the appropriate HTML tag used for the largest heading","Answers": ["h6","head","heading","h1"], "Correct":4};
+var question3 = {"Question":"Select the appropriate HTML tag for inserting a line break","Answers": ["br","break","brbr","lb"], "Correct":1};
+var question4 = {"Question":"In CSS,select the property used to set the background color of an image?","Answers": ["Color:background","color","background:color","background-color"], "Correct":4};
+var question5 = {"Question":"Which of the following function of a string object returns the character at the specified index?","Answers": ["charAt()","charCodeAt()","concat()","indexOf()"], "Correct":1};
+var question6 = {"Question":"How do you write an IF statement in Javascript","Answers": ["if i=5 then","if (i=5) then","if i=5","if (i=5)"], "Correct":4};
+var question7 = {"Question":"Choose the correct JavaScript syntax to change the content of the HTML code: <p id=\"words\"> LoremIpsum </p>","Answers": ["document.getElement(\"words\").innerHTML=\"different words\";","document.getElementbyId(\"words\").innerHTML=\"different words\";","document.getId(\"words\").innerHTML=\"different words\";","document.getElementbyId(\"words\").innerHTML=different words;"], "Correct":2};
+var question8 = {"Question":"What is the correct syntax for referring to an external script called “script.js”?","Answers": ["<script src=\"script.js\">","<script href=\"script.js\">","<script ref=\"script.js\">","<script name=\"script.js\">"], "Correct":1};
+var question9 = {"Question":"What is the function of an array that runs through each element of the array","Answers": ["forEach()","filter()","every()","concat()"], "Correct":1};
+var question10 = {"Question":"Which of these is NOT a commonly used data type","Answers": ["String","Boolean","Alert","Number"], "Correct":3};
 var questions = [question1,question2,question3,question4,question5,question6,question7,question8,question9,question10];
 
 var highScores= JSON.parse(localStorage.getItem("highScores"));
@@ -86,7 +86,7 @@ function answerQuestion(){
         }
         currentQ++;
         if (currentQ < questions.length) {
-        quizSet(currentQ);}
+        correctAnswer = quizSet(currentQ);}
         else {
             quizEnd();
         }
