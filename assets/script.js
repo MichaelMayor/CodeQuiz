@@ -1,3 +1,4 @@
+// Grab all the elements
 var homeBtn = document.querySelector("#home-button");
 var resetBtn = document.querySelector("#reset-button");
 var startBtn = document.querySelector("#start-button");
@@ -16,13 +17,14 @@ var initials = document.querySelector('#initials');
 var finalScore = document.querySelector('#score')
 
 
-
+// Set neccesary variables
 var totalSeconds = 60;
 var secondsElapsed = 1;
 var currentQ = 0;
 var correctAnswer;
 var interval;
 var score = 0;
+// set questions, answer options, and correct answers
 var question1 = {"Question":"Select the correct HTML option to create an e-mail link","Answers": ["Mail>xxx@yyy.com/mail","Mail href=\"xxx@yyy.com\"","A href=mailto:xxx@yyy.com","A href=\"xxx@yyy.com\""], "Correct":3};
 var question2 = {"Question":"Select the appropriate HTML tag used for the largest heading","Answers": ["h6","head","heading","h1"], "Correct":4};
 var question3 = {"Question":"Select the appropriate HTML tag for inserting a line break","Answers": ["br","break","brbr","lb"], "Correct":1};
@@ -34,14 +36,14 @@ var question8 = {"Question":"What is the correct syntax for referring to an exte
 var question9 = {"Question":"What is the function of an array that runs through each element of the array","Answers": ["forEach()","filter()","every()","concat()"], "Correct":1};
 var question10 = {"Question":"Which of these is NOT a commonly used data type","Answers": ["String","Boolean","Alert","Number"], "Correct":3};
 var questions = [question1,question2,question3,question4,question5,question6,question7,question8,question9,question10];
-
+// get the highscore variable from local storage
 var highScores= JSON.parse(localStorage.getItem("highScores"));
 
 
 
 
 
-
+// function to start the timer and end the quiz when time runs out
 function startTimer() {
   interval = setInterval(function(){
     var secondsRemaining = totalSeconds - secondsElapsed; 
@@ -52,6 +54,7 @@ function startTimer() {
     }
 }, 1000)}
 
+//Sets up the current question and answers
 function quizSet(currentQ){
     questionText.textContent = questions[currentQ].Question;
     answer1.textContent = "1: " + questions[currentQ].Answers[0];
@@ -61,6 +64,7 @@ function quizSet(currentQ){
     return questions[currentQ].Correct
 }
 
+// Initializes the quiz
 function quizStart(){
     startTimer();
     score = 0;
@@ -73,6 +77,7 @@ function quizStart(){
     document.getElementById("questions").style. display = "block";
 }
 
+// checks the users answer against the correct answer, adjusts score accordingly, and then queues up the next question
 function answerQuestion(){
     if(event.target.matches("button")) {
         currentAns = parseInt(event.target.id[3]);
@@ -94,6 +99,7 @@ function answerQuestion(){
       }
 }
 
+//ends the timer and takes the user to the end of quiz screen
 function quizEnd(){
     score += (totalSeconds-secondsElapsed);
     clearInterval(interval);
@@ -105,12 +111,11 @@ function quizEnd(){
     document.getElementById("result").style.display = "none"; 
 }
 
+//sorts the scores from highest to lowest, then writes the top ten high scores to the highscore table, then writes the scores to the local storage
 function writeHighscores(){
-    
-    
     sortedhighScores= Object.entries(highScores).sort((a,b)=>b[1]-a[1]);
     tbody.innerHTML = null;
-    for (var i = 0; i < sortedhighScores.length; i++) {
+    for (var i = 0; i < 10; i++) {
     var tr = "<tr>";
         var place = i+1
     tr += "<td>"+ place.toString() +"<td>" + sortedhighScores[i][0] + "</td>" + "<td>" + sortedhighScores[i][1].toString() + "</td></tr>";
@@ -119,12 +124,14 @@ function writeHighscores(){
     localStorage.setItem("highScores", JSON.stringify(highScores))
 }}
 
+//resets the scores on the table and in the local storage
 function resetScores(){
     highScores = {};
     localStorage.setItem("highScores", JSON.stringify(highScores))
     writeHighscores();
 }
 
+//brings the user back to the home page state
 function goHome(){
     document.getElementById("home").style.display = "block";
     document.getElementById("highscores").style.display = "none";
@@ -133,6 +140,7 @@ function goHome(){
     timer.textContent = totalSeconds;
 }
 
+//brings the user to the highscore page and populates the table
 function goHighscores(){
     
     document.getElementById("home").style.display = "none";
@@ -142,6 +150,7 @@ function goHighscores(){
     writeHighscores()
 }
 
+//adds the users score to the high scores
 function setNewScore(event){
     event.preventDefault();
     if (highScores==null) {highScores = {};}
