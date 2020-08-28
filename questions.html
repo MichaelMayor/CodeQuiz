@@ -12,9 +12,25 @@
   <body>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="./highscores.html">View Highscores</a>
-        <span class="navbar-text">Time: <span id="timer">0</span></span>
+        <span class="navbar-text">Time: <span id="timer">60</span></span>
       </nav>
     <div class="container">
+        <div class="row">
+            <h1 id="question-text">Question!</h1>
+        </div>
+        <div class="btn-group-vertical" id="answers">
+            <button type="button" class="btn btn-secondary text-left" id="1">1: First Answer</button>
+        
+        <button type="button" class="btn btn-secondary text-left" id="2">2: Second Answer</button>
+        <button type="button" class="btn btn-secondary text-left" id="3">3: Third Answer</button>
+        <button type="button" class="btn btn-secondary text-left" id="4">4: Fourth Answer</button>
+        </div>
+
+        <div class="row">
+            <div class="col border-top">
+            <p><em id="result">Result</em></p>
+        </div>
+        </div>
         
     </div>
 
