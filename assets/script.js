@@ -102,6 +102,7 @@ function quizEnd(){
     document.getElementById("highscores").style.display = "none";
     document.getElementById("newscore").style.display = "block";
     document.getElementById("questions").style.display = "none"; 
+    document.getElementById("result").style.display = "none"; 
 }
 
 function writeHighscores(){
@@ -133,6 +134,7 @@ function goHome(){
 }
 
 function goHighscores(){
+    
     document.getElementById("home").style.display = "none";
     document.getElementById("highscores").style.display = "block";
     document.getElementById("newscore").style.display = "none";
