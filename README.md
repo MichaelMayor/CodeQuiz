@@ -4,4 +4,4 @@ This project is to generate a quiz using HTML, CSS, and Javascript to create an 
 
 Page is available at https://michaelmayor.github.io/CodeQuiz/
 
-Screenshot ![Screenshot](.assets/Screenshot.png)
+Screenshot ![Screenshot](./assets/Screenshot.png)
