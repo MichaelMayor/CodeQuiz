@@ -4,7 +4,9 @@ This project is to generate a quiz using HTML, CSS, and Javascript to create an 
 
 Page is available at https://michaelmayor.github.io/CodeQuiz/
 
-Screenshot ![Screenshot](.assets/screenshot.jpg)
+Screenshot ![Screenshot](./assets/Screenshot.png)
+
+
 
 
 MIT License
@@ -28,3 +30,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
